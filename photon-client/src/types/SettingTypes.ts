@@ -154,7 +154,6 @@ export enum ValidQuirks {
   CompletelyBroken = "CompletelyBroken",
   FPSCap100 = "FPSCap100",
   Gain = "Gain",
-  PiCam = "PiCam",
   StickyFPS = "StickyFPS"
 }
 
@@ -189,6 +188,17 @@ export interface CameraSettings {
 
   cameraQuirks: QuirkyCamera;
   isCSICamera: boolean;
+
+  minExposure: number;
+  maxExposure: number;
+  minBrightness: number;
+  maxBrightness: number;
+  minGain: number;
+  maxGain: number;
+  minRedGain: number;
+  maxRedGain: number;
+  minBlueGain: number;
+  maxBlueGain: number;
 }
 
 export interface CameraSettingsChangeRequest {
@@ -283,11 +293,20 @@ export const PlaceholderCameraSettings: CameraSettings = {
       CompletelyBroken: false,
       FPSCap100: false,
       Gain: false,
-      PiCam: false,
       StickyFPS: false
     }
   },
-  isCSICamera: false
+  isCSICamera: false,
+  minExposure: 0,
+  maxExposure: 100,
+  minBrightness: 0,
+  maxBrightness: 100,
+  minGain: 0,
+  maxGain: 100,
+  minRedGain: 0,
+  maxRedGain: 100,
+  minBlueGain: 0,
+  maxBlueGain: 100,
 };
 
 export enum CalibrationBoardTypes {

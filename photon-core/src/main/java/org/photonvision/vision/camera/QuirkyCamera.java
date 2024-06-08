@@ -45,9 +45,6 @@ public class QuirkyCamera {
                             "FaceTime HD Camera",
                             CameraQuirk.CompletelyBroken), // Mac Facetime Camera shared into Windows in Bootcamp
                     new QuirkyCamera(0x2000, 0x1415, CameraQuirk.Gain, CameraQuirk.FPSCap100), // PS3Eye
-                    new QuirkyCamera(
-                            -1, -1, "mmal service 16.1", CameraQuirk.PiCam), // PiCam (via V4L2, not zerocopy)
-                    new QuirkyCamera(-1, -1, "unicam", CameraQuirk.PiCam), // PiCam (via V4L2, not zerocopy)
                     new QuirkyCamera(0x85B, 0x46D, CameraQuirk.AdjustableFocus), // Logitech C925-e
                     // Generic arducam. Since OV2311 can't be differentiated at first boot, apply stickyFPS to
                     // the generic case, too
@@ -77,14 +74,14 @@ public class QuirkyCamera {
                             CameraQuirk.ArduOV9281));
 
     public static final QuirkyCamera DefaultCamera = new QuirkyCamera(0, 0, "");
+
     public static final QuirkyCamera ZeroCopyPiCamera =
-            new QuirkyCamera(
-                    -1,
-                    -1,
-                    "mmal service 16.1",
-                    CameraQuirk.PiCam,
-                    CameraQuirk.Gain,
-                    CameraQuirk.AWBGain); // PiCam (special zerocopy version)
+    new QuirkyCamera(
+            -1,
+            -1,
+            "mmal service 16.1",
+            CameraQuirk.Gain,
+            CameraQuirk.AWBGain); // PiCam (special zerocopy version)
 
     @JsonProperty("baseName")
     public final String baseName;

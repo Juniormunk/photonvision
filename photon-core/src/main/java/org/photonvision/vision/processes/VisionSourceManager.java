@@ -105,7 +105,7 @@ public class VisionSourceManager {
             for (String path : LibCameraJNI.getCameraNames()) {
                 String name = LibCameraJNI.getSensorModel(path).getFriendlyName();
                 cameraInfos.add(
-                        new CameraInfo(-1, path, name, new String[] {}, -1, -1, CameraType.ZeroCopyPicam));
+                        new CameraInfo(-1, path, name, new String[] {}, -1, -1, CameraType.LibCameraCam));
             }
         return cameraInfos;
     }
@@ -316,7 +316,7 @@ public class VisionSourceManager {
                 matchCamerasByStrategy(
                         detectedCameraList,
                         unloadedConfigs,
-                        new CameraMatchingOptions(false, false, true, true, CameraType.ZeroCopyPicam)));
+                        new CameraMatchingOptions(false, false, true, true, CameraType.LibCameraCam)));
 
         logger.info("Matching USB cameras by usb port & name & USB VID/PID...");
         cameraConfigurations.addAll(
@@ -569,7 +569,7 @@ public class VisionSourceManager {
 
             boolean is_pi = Platform.isRaspberryPi();
 
-            if (configuration.cameraType == CameraType.ZeroCopyPicam && is_pi) {
+            if (configuration.cameraType == CameraType.LibCameraCam && is_pi) {
                 // If the camera was loaded from libcamera then create its source using libcamera.
                 var piCamSrc = new LibcameraGpuSource(configuration);
                 cameraSources.add(piCamSrc);

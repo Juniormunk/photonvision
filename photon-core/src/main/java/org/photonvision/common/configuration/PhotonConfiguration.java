@@ -178,5 +178,15 @@ public class PhotonConfiguration {
         public boolean isFovConfigurable = true;
         public QuirkyCamera cameraQuirks;
         public boolean isCSICamera;
+        public int minExposure;
+        public int maxExposure;
+        public int minBrightness;
+        public int maxBrightness;
+        public int minGain;
+        public int maxGain;
+        public int minRedGain;
+        public int maxRedGain;
+        public int minBlueGain;
+        public int maxBlueGain;
     }
 }

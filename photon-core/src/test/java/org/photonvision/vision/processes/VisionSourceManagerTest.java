@@ -216,7 +216,7 @@ public class VisionSourceManagerTest {
                         new String[] {},
                         -1,
                         -1,
-                        CameraType.ZeroCopyPicam);
+                        CameraType.LibCameraCam);
         cameraInfos.add(info10);
         inst.tryMatchCamImpl(cameraInfos);
 
@@ -232,7 +232,7 @@ public class VisionSourceManagerTest {
                         new String[] {},
                         -1,
                         -1,
-                        CameraType.ZeroCopyPicam);
+                        CameraType.LibCameraCam);
         cameraInfos.add(info11);
         inst.tryMatchCamImpl(cameraInfos);
 
@@ -248,7 +248,7 @@ public class VisionSourceManagerTest {
                         new String[] {},
                         -1,
                         -1,
-                        CameraType.ZeroCopyPicam);
+                        CameraType.LibCameraCam);
         cameraInfos.add(info12);
         inst.tryMatchCamImpl(cameraInfos);
 
@@ -264,7 +264,7 @@ public class VisionSourceManagerTest {
                         new String[] {},
                         -1,
                         -1,
-                        CameraType.ZeroCopyPicam);
+                        CameraType.LibCameraCam);
         cameraInfos.add(info13);
         inst.tryMatchCamImpl(cameraInfos);
 
@@ -453,7 +453,7 @@ public class VisionSourceManagerTest {
                         new String[] {},
                         -1,
                         -1,
-                        CameraType.ZeroCopyPicam);
+                        CameraType.LibCameraCam);
 
         CameraInfo info2 =
                 new CameraInfo(
@@ -463,12 +463,12 @@ public class VisionSourceManagerTest {
                         new String[] {},
                         -1,
                         -1,
-                        CameraType.ZeroCopyPicam);
+                        CameraType.LibCameraCam);
 
         var camera1_saved_config =
                 new CameraConfiguration(
                         "OV9281", "OV9281", "test-1", "/base/soc/i2c0mux/i2c@0/ov9281@60", new String[0]);
-        camera1_saved_config.cameraType = CameraType.ZeroCopyPicam;
+        camera1_saved_config.cameraType = CameraType.LibCameraCam;
         camera1_saved_config.usbVID = -1;
         camera1_saved_config.usbPID = -1;
 
@@ -477,7 +477,7 @@ public class VisionSourceManagerTest {
                         "OV9281", "OV9281 (1)", "test-2", "/base/soc/i2c0mux/i2c@1/ov9281@60", new String[0]);
         camera2_saved_config.usbVID = -1;
         camera2_saved_config.usbPID = -1;
-        camera2_saved_config.cameraType = CameraType.ZeroCopyPicam;
+        camera2_saved_config.cameraType = CameraType.LibCameraCam;
 
         cameraInfos.add(info1);
         cameraInfos.add(info2);

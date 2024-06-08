@@ -104,7 +104,17 @@ export const useCameraSettingsStore = defineStore("cameraSettings", {
         pipelineNicknames: d.pipelineNicknames,
         currentPipelineIndex: d.currentPipelineIndex,
         pipelineSettings: d.currentPipelineSettings,
-        cameraQuirks: d.cameraQuirks
+        cameraQuirks: d.cameraQuirks,
+        minExposure: d.minExposure,
+        maxExposure: d.maxExposure,
+        minBrightness: d.minBrightness,
+        maxBrightness: d.maxBrightness,
+        minGain: d.minGain,
+        maxGain: d.maxGain,
+        minRedGain: d.minRedGain,
+        maxRedGain: d.maxRedGain,
+        minBlueGain: d.minBlueGain,
+        maxBlueGain: d.maxBlueGain,
       }));
     },
     /**

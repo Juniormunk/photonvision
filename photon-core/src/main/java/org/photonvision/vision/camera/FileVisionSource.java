@@ -89,7 +89,7 @@ public class FileVisionSource extends VisionSource {
         }
 
         @Override
-        public void setExposure(double exposure) {}
+        public void setExposure(int exposure) {}
 
         public void setAutoExposure(boolean cameraAutoExposure) {}
 
@@ -112,6 +112,36 @@ public class FileVisionSource extends VisionSource {
         @Override
         public HashMap<Integer, VideoMode> getAllVideoModes() {
             return videoModes;
+        }
+
+        @Override
+        public int getMinExposure() {
+            return 0;
+        }
+
+        @Override
+        public int getMaxExposure() {
+            return 0;
+        }
+
+        @Override
+        public int getMinBrightness() {
+            return 0;
+        }
+
+        @Override
+        public int getMaxBrightness() {
+            return 0;
+        }
+
+        @Override
+        public int getMinGain() {
+            return 0;
+        }
+
+        @Override
+        public int getMaxGain() {
+            return 0;
         }
     }
 }

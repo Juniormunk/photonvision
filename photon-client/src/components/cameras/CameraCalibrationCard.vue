@@ -372,17 +372,16 @@ const setSelectedVideoFormat = (format: VideoFormat) => {
               :disabled="useCameraSettingsStore().currentCameraSettings.pipelineSettings.cameraAutoExposure"
               label="Exposure"
               tooltip="Directly controls how much light is allowed to fall onto the sensor, which affects apparent brightness"
-              :min="0"
-              :max="100"
+              :min="useCameraSettingsStore().currentCameraSettings.minExposure"
+              :max="useCameraSettingsStore().currentCameraSettings.maxExposure"
               :slider-cols="8"
-              :step="0.1"
               @input="(args) => useCameraSettingsStore().changeCurrentPipelineSetting({ cameraExposure: args }, false)"
             />
             <pv-slider
               v-model="useCameraSettingsStore().currentPipelineSettings.cameraBrightness"
               label="Brightness"
-              :min="0"
-              :max="100"
+              :min="useCameraSettingsStore().currentCameraSettings.minBrightness"
+              :max="useCameraSettingsStore().currentCameraSettings.maxBrightness"
               :slider-cols="8"
               @input="
                 (args) => useCameraSettingsStore().changeCurrentPipelineSetting({ cameraBrightness: args }, false)
@@ -403,16 +402,16 @@ const setSelectedVideoFormat = (format: VideoFormat) => {
               v-model="useCameraSettingsStore().currentPipelineSettings.cameraGain"
               label="Camera Gain"
               tooltip="Controls camera gain, similar to brightness"
-              :min="0"
-              :max="100"
+              :min="useCameraSettingsStore().currentCameraSettings.minGain"
+              :max="useCameraSettingsStore().currentCameraSettings.maxGain"
               @input="(args) => useCameraSettingsStore().changeCurrentPipelineSetting({ cameraGain: args }, false)"
             />
             <pv-slider
               v-if="useCameraSettingsStore().currentPipelineSettings.cameraRedGain !== -1"
               v-model="useCameraSettingsStore().currentPipelineSettings.cameraRedGain"
               label="Red AWB Gain"
-              :min="0"
-              :max="100"
+              :min="useCameraSettingsStore().currentCameraSettings.minRedGain"
+              :max="useCameraSettingsStore().currentCameraSettings.maxRedGain"
               tooltip="Controls red automatic white balance gain, which affects how the camera captures colors in different conditions"
               @input="(args) => useCameraSettingsStore().changeCurrentPipelineSetting({ cameraRedGain: args }, false)"
             />
@@ -420,8 +419,8 @@ const setSelectedVideoFormat = (format: VideoFormat) => {
               v-if="useCameraSettingsStore().currentPipelineSettings.cameraBlueGain !== -1"
               v-model="useCameraSettingsStore().currentPipelineSettings.cameraBlueGain"
               label="Blue AWB Gain"
-              :min="0"
-              :max="100"
+              :min="useCameraSettingsStore().currentCameraSettings.minBlueGain"
+              :max="useCameraSettingsStore().currentCameraSettings.maxBlueGain"
               tooltip="Controls blue automatic white balance gain, which affects how the camera captures colors in different conditions"
               @input="(args) => useCameraSettingsStore().changeCurrentPipelineSetting({ cameraBlueGain: args }, false)"
             />

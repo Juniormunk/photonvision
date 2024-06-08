@@ -453,10 +453,10 @@ public class VisionModule {
     }
 
     private boolean camShouldControlLEDs() {
-        // Heuristic - if the camera has a known FOV or is a piCam, assume it's in use for
+        // Heuristic - if the camera has a known FOV, assume it's in use for
         // vision processing, and should command stuff to the LED's.
         // TODO: Make LED control a property of the camera itself and controllable in the UI.
-        return isVendorCamera() || cameraQuirks.hasQuirk(CameraQuirk.PiCam);
+        return isVendorCamera();
     }
 
     private void setVisionLEDs(boolean on) {
@@ -506,7 +506,7 @@ public class VisionModule {
         var ret = new PhotonConfiguration.UICameraConfiguration();
 
         ret.fov = visionSource.getSettables().getFOV();
-        ret.isCSICamera = visionSource.getCameraConfiguration().cameraType == CameraType.ZeroCopyPicam;
+        ret.isCSICamera = visionSource.getCameraConfiguration().cameraType == CameraType.LibCameraCam;
         ret.nickname = visionSource.getSettables().getConfiguration().nickname;
         ret.uniqueName = visionSource.getSettables().getConfiguration().uniqueName;
         ret.currentPipelineSettings =
@@ -544,8 +544,18 @@ public class VisionModule {
                         .collect(Collectors.toList());
 
         ret.isFovConfigurable =
-                !(ConfigManager.getInstance().getConfig().getHardwareConfig().hasPresetFOV()
-                        && cameraQuirks.hasQuirk(CameraQuirk.PiCam));
+                !(ConfigManager.getInstance().getConfig().getHardwareConfig().hasPresetFOV());
+
+        ret.minExposure = visionSource.getSettables().getMinExposure();
+        ret.maxExposure = visionSource.getSettables().getMaxExposure();
+        ret.minBrightness = visionSource.getSettables().getMinBrightness();
+        ret.maxBrightness = visionSource.getSettables().getMaxBrightness();
+        ret.minGain = visionSource.getSettables().getMinGain();
+        ret.maxGain = visionSource.getSettables().getMaxGain();
+        ret.minRedGain = visionSource.getSettables().getMinRedGain();
+        ret.maxRedGain = visionSource.getSettables().getMaxRedGain();
+        ret.minBlueGain = visionSource.getSettables().getMinBlueGain();
+        ret.maxBlueGain = visionSource.getSettables().getMaxBlueGain();
 
         return ret;
     }

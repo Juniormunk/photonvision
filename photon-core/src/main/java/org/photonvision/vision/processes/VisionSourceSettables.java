@@ -42,19 +42,47 @@ public abstract class VisionSourceSettables {
         return configuration;
     }
 
-    public abstract void setExposure(double exposure);
+    public abstract void setExposure(int exposure);
+
+    public abstract int getMinExposure();
+
+    public abstract int getMaxExposure();
 
     public abstract void setAutoExposure(boolean cameraAutoExposure);
 
     public abstract void setBrightness(int brightness);
 
+    public abstract int getMinBrightness();
+
+    public abstract int getMaxBrightness();
+
     public abstract void setGain(int gain);
+
+    public abstract int getMinGain();
+
+    public abstract int getMaxGain();
 
     // Pretty uncommon so instead of abstract this is just a no-op by default
     // Overriden by cameras with AWB gain support
     public void setRedGain(int red) {}
 
+    public int getMinRedGain() {
+        return 1;
+    }
+
+    public int getMaxRedGain() {
+        return 100;
+    }
+
     public void setBlueGain(int blue) {}
+
+    public int getMinBlueGain() {
+        return 1;
+    }
+
+    public int getMaxBlueGain() {
+        return 100;
+    }
 
     public abstract VideoMode getCurrentVideoMode();
 

@@ -44,7 +44,7 @@ public class LibcameraGpuFrameProvider extends FrameProvider {
 
     @Override
     public String getName() {
-        return "AcceleratedPicamFrameProvider";
+        return "LibCameraCamera Model: " + this.settables.getModel();
     }
 
     int badFrameCounter = 0;

@@ -73,7 +73,7 @@ public class VisionModuleManagerTest {
         }
 
         @Override
-        public void setExposure(double exposure) {}
+        public void setExposure(int exposure) {}
 
         @Override
         public void setBrightness(int brightness) {}
@@ -100,6 +100,36 @@ public class VisionModuleManagerTest {
 
         @Override
         public void setAutoExposure(boolean cameraAutoExposure) {}
+
+        @Override
+        public int getMinExposure() {
+            return 0;
+        }
+
+        @Override
+        public int getMaxExposure() {
+            return 0;
+        }
+
+        @Override
+        public int getMinBrightness() {
+            return 0;
+        }
+
+        @Override
+        public int getMaxBrightness() {
+            return 0;
+        }
+
+        @Override
+        public int getMinGain() {
+            return 0;
+        }
+
+        @Override
+        public int getMaxGain() {
+            return 0;
+        }
     }
 
     private static class TestDataConsumer implements CVPipelineResultConsumer {

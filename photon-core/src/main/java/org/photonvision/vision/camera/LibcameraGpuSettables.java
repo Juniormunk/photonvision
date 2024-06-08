@@ -31,7 +31,7 @@ import org.photonvision.vision.processes.VisionSourceSettables;
 
 public class LibcameraGpuSettables extends VisionSourceSettables {
     private FPSRatedVideoMode currentVideoMode;
-    private double lastManualExposure = 50;
+    private int lastManualExposure = 50;
     private int lastBrightness = 50;
     private boolean lastAutoExposureActive;
     private int lastGain = 50;
@@ -114,7 +114,7 @@ public class LibcameraGpuSettables extends VisionSourceSettables {
     }
 
     @Override
-    public void setExposure(double exposure) {
+    public void setExposure(int exposure) {
         if (exposure < 0.0 || lastAutoExposureActive) {
             // Auto-exposure is active right now, don't set anything.
             return;
@@ -122,24 +122,6 @@ public class LibcameraGpuSettables extends VisionSourceSettables {
 
         // Store the exposure for use when we need to recreate the camera.
         lastManualExposure = exposure;
-
-        // Minimum exposure can't be below 1uS cause otherwise it would be 0 and 0 is auto exposure.
-        double minExposure = 1;
-
-        // HACKS!
-        // If we set exposure too low, libcamera crashes or slows down
-        // Very weird and smelly
-        // For now, band-aid this by just not setting it lower than the "it breaks" limit
-        // is different depending on camera.
-        // All units are uS.
-        if (sensorModel == LibCameraJNI.SensorModel.OV9281) {
-            minExposure = 4800;
-        } else if (sensorModel == LibCameraJNI.SensorModel.OV5647) {
-            minExposure = 560;
-        }
-        // 80,000 uS seems like an exposure value that will be greater than ever needed while giving
-        // enough control over exposure.
-        exposure = MathUtils.map(exposure, 0, 100, minExposure, 80000);
 
         var success = LibCameraJNI.setExposure(r_ptr, (int) exposure);
         if (!success) LibcameraGpuSource.logger.warn("Couldn't set Pi Camera exposure");
@@ -250,5 +232,51 @@ public class LibcameraGpuSettables extends VisionSourceSettables {
 
     public LibCameraJNI.SensorModel getModel() {
         return sensorModel;
+    }
+
+    @Override
+    public int getMinExposure() {
+        // Minimum exposure can't be below 1uS cause otherwise it would be 0 and 0 is auto exposure.
+        int minExposure = 1;
+
+        // HACKS!
+        // If we set exposure too low, libcamera crashes or slows down
+        // Very weird and smelly
+        // For now, band-aid this by just not setting it lower than the "it breaks" limit
+        // is different depending on camera.
+        // All units are uS.
+        if (sensorModel == LibCameraJNI.SensorModel.OV9281) {
+            minExposure = 4800;
+        } else if (sensorModel == LibCameraJNI.SensorModel.OV5647) {
+            minExposure = 560;
+        }
+        return minExposure;
+    }
+
+    @Override
+    public int getMaxExposure() {
+        // 80,000 uS seems like an exposure value that will be greater than ever needed while giving
+        // enough control over exposure.
+        return 80000;
+    }
+
+    @Override
+    public int getMinBrightness() {
+        return 1;
+    }
+
+    @Override
+    public int getMaxBrightness() {
+        return 100;
+    }
+
+    @Override
+    public int getMinGain() {
+        return 1;
+    }
+
+    @Override
+    public int getMaxGain() {
+        return 100;
     }
 }
