@@ -17,15 +17,15 @@ const resetTempSettingsStruct = () => {
 const settingsValid = ref(true);
 
 const isValidNetworkTablesIP = (v: string | undefined): boolean => {
-  // Check if it is a valid team number between 1-9999
-  const teamNumberRegex = /^[1-9][0-9]{0,3}$/;
+  // Check if it is a valid team number between 1-25599
+  const teamNumberRegex = /^(?:[1-9]\d{0,4}|2[0-4]\d{3}|25[0-5]\d{2}|2559\d|25599)$/;
   // Check if it is a team number longer than 5 digits
   const badTeamNumberRegex = /^[0-9]{5,}$/;
 
   if (v === undefined) return false;
   if (teamNumberRegex.test(v)) return true;
   if (isValidIPv4(v)) return true;
-  // need to check these before the hostname. "0" and "99999" are valid hostnames, but we don't want to allow then
+  // need to check these before the hostname. "0" and "99999" are valid hostnames, but we don't want to allow them
   if (v === "0") return false;
   if (badTeamNumberRegex.test(v)) return false;
   return isValidHostname(v);
